@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Info windows</title>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+      #bodyContent {
+        background-color: #eeeeee;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+
+function initMap() {
+  var centralLatLng = {lat: 49.2599126, lng: -123.1340487 };
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 10,
+    center: centralLatLng
+  });
+
+  var apartment = new google.maps.Marker({
+    position: centralLatLng,
+    map: map,
+    title: 'Ye Olde Apartment'
+  });
+
+  var dabbleDB = new google.maps.Marker({
+    position: {lat:49.268783, lng: -123.118799},
+    map: map,
+    title: 'Smallthought Office'
+  });
+
+  var odyssey = new google.maps.Marker({
+    position: {lat: 49.277383, lng: -123.127989},
+    map: map,
+    title: 'The [Old] Odyssey'
+  });
+
+  var apartmentContent = '<div id="content">'+
+    '<div id="siteNotice">'+
+    '</div>'+
+    '<h1 id="firstHeading" class="firstHeading">Ye Olde Apartment</h1>'+
+    '<div id="bodyContent">'+
+    '<p><b>My old place</b>, also referred to as <b>Chez Catton</b>, is a decaying ' +
+    'Vancouver apartment that was probablly really adorable when it was '+
+    'first built, but due to years of neglect retains only a residual '+
+    'charm. It was, however, extremely cheap, and with rental prices '+
+    'the way they are around South Granville, it was hard to say no. '+
+    'It even had a rooftop patio, but not one you\'d actually want to '+
+    'spend time on.'+
+    '(last visited September 30, 2013).</p>'+
+    '</div>'+
+    '</div>';
+
+  var dabbleContent = '<div id="content">'+
+    '<div id="siteNotice">'+
+    '</div>'+
+    '<h1 id="firstHeading" class="firstHeading">DabbleDB Headquarters</h1>'+
+    '<div id="bodyContent">'+
+    '<p><b>Smallthought Inc.</b>, former home of  <b>DabbleDB</b>, an online ' +
+    'database management system. Pretty sweet location for an office! '+
+    '(last visited August 30, 2010).</p>'+
+    '</div>'+
+    '</div>';
+
+  var odysseyContent = '<div id="content">'+
+    '<div id="siteNotice">'+
+    '</div>'+
+    '<h1 id="firstHeading" class="firstHeading">Ye Olde Odyssey Nightclub</h1>'+
+    '<div id="bodyContent">'+
+    '<p>The <b>Old</b> Odyssey Nightclub near Davie Street. It\'s since reopened '+
+    'downtown, but for me it will always have its heart here. I spent a LOT of my '+
+    'twenties here. Sigh, Shower Power and the Lonely Hearts of \'80s Night... '+
+    '(last visited circa 2009 I think).</p>'+
+    '</div>'+
+    '</div>';
+
+  var apartmentInfo = new google.maps.InfoWindow({
+    content: apartmentContent
+  });
+
+  var dabbleInfo = new google.maps.InfoWindow({
+    content: dabbleContent
+  });
+
+  var odysseyInfo = new google.maps.InfoWindow({
+    content: odysseyContent
+  });
+
+  dabbleDB.addListener('click', function() {
+    dabbleInfo.open(map, dabbleDB);
+  });
+
+  apartment.addListener('click', function() {
+    apartmentInfo.open(map, apartment);
+  });
+
+  odyssey.addListener('click', function() {
+    odysseyInfo.open(map, odyssey);
+  });
+}
+
+    </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGO5_NtEYOzr16V20oj4oJUVWL6IbkUj4&signed_in=true&callback=initMap"></script>
+  </body>
+</html>
